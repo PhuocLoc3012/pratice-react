@@ -30,10 +30,12 @@ function TodoForm(props) {
     })
 
     const handleSubmit = (values) => {
-        console.log('todo form: ', values);
-        // const data = schema.saveParse(values)
-        // console.log(data);
-        
+
+        const {onSubmit} = props // để kiểm tra thử thằng cha có truyền xuống
+        if (onSubmit) {
+            onSubmit(values)
+        }
+        form.reset() //review due to not working
         
     }
     return (
