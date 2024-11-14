@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/Counter/couterSlice'
+import counterReducer from '../features/Counter/counterSlice'
 
 const rootReducer = {
     // include all of reducers which we having
-    counter: counterReducer,
+    count: counterReducer, // đăng kí trên store
 
 }
 
 
 const store = configureStore({
-    reducers: rootReducer,
+    reducer: rootReducer,
 
 })
 

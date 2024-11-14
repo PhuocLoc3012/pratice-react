@@ -9,6 +9,7 @@ import NotFound from "./components/NotFound";
 import { Switch } from "@material-ui/core";
 import { useEffect } from "react";
 import productApi from "./api/productApi";
+import CounterFeature from "./features/Counter";
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
         {/* Nested Routing */}
         <Route path="/todos/*" element={<ToDoFeature/>} />
         <Route path="/albums" element={<AlbumFeature/>} />
-
+        <Route path="/" element={<CounterFeature/>}></Route>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
 
