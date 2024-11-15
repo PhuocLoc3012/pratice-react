@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { increase, decrease } from './counterSlice'; // name import
 
+import styles from './styles.module.css'
+
 CounterFeature.propTypes = {
     
 };
@@ -25,7 +27,7 @@ function CounterFeature(props) {
         dispatch(action)
     }
     return (
-        <div>
+        <div className={styles.counter}>
             Count: {count}
 
             <div>
