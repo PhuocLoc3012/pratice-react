@@ -8,9 +8,10 @@ Album.propTypes = {
 function Album(props) {
   const { album } = props;
   return (
-    <div className="album">
-      <div className="album__thumbnail">
-        <img src={album.thumbnaiUrl} alt=""/>
+    //dấu __: quan hệ cha con, -- chỉ trạng thái
+    <div className="album album--active album-special">
+      <div className="album__thumbnail album__thumbnail--active">
+        <img className="album__image" src={album.thumbnaiUrl} alt=""/>
         <p>{album.name}</p>
       </div>
     </div>

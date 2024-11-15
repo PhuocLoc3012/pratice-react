@@ -1,5 +1,16 @@
 .album{
-    &__thumbnail{
 
+    &--active {
+        background-color: goldenrod;
+    }
+
+    &__thumbnail{
+        & > img {
+            border-radius: 0.5rem;
+        }
+
+        &--active {
+            color: goldenrod;
+        }
     }
 }
