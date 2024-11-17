@@ -12,29 +12,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "components/form-controls/InputField";
 import { Avatar, Button, Typography } from "@mui/material";
 //import using jsconfig
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from "@mui/styles";
 import PasswordField from "components/form-controls/PasswordField";
 import { Email } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        
-    }, 
-    avatar: { 
-        margin: '0 auto',
-        
-    },
-    title: {
-        textAlign: 'center',
-        margin: '2 0 3 0'
-    },
-    submit: {
-        margin: '4 0 2 0'
-    },
-}))
-
-
-
+  root: {},
+  avatar: {
+    margin: "0 auto",
+  },
+  title: {
+    textAlign: "center",
+    margin: "2 0 3 0",
+  },
+  submit: {
+    margin: "4 0 2 0",
+  },
+}));
 
 // rfsp
 RegisterForm.propTypes = {
@@ -42,28 +36,41 @@ RegisterForm.propTypes = {
 };
 
 function RegisterForm(props) {
-
-    const classes = useStyles()
-
+  const classes = useStyles();
 
   //valiation
-  const schema = z.object({
-    fullName: z
-      .string()
-      .min(1, "Title is required"),
-      //.startsWith("a", { message: "Must be start with a" }),
-    email: z.string(),
-    password: z.string(),
-    retypePassword: z.string(),
-  });
-
+  const schema = z
+    .object({
+      fullName: z
+        .string()
+        .min(1, "Fullname is required")
+        .refine(
+          (value) => value.split(" ").length >= 2,
+          "Fullname is at least two words"
+        ),
+      email: z
+        .string()
+        .email("Invalid email address"),
+      password: z
+        .string()
+        .min(1, { message: "Password is required" })
+        .min(6, "Password must be at least 6 characters")
+        .nonempty({ message: "Password is required" }),
+      retypePassword: z
+        .string()
+        .min(1, 'Please retype your password')
+    })
+    .refine((data) => data.password === data.retypePassword, {
+      message: "Passwords must match",
+      path: ["retypePassword"], // Associate the error with the retypePassword field
+    });
   //tạo ra form object sử dụng hook useForm
   const form = useForm({
     defaultValues: {
-        fullName: '',
-        email: '',
-        password: '',
-        retypePassword: '',
+      fullName: "",
+      email: "",
+      password: "",
+      retypePassword: "",
     },
     resolver: zodResolver(schema),
   });
@@ -74,27 +81,35 @@ function RegisterForm(props) {
       onSubmit(values);
     }
     form.reset({
-        fullName: "",
-        email: "",
-        password: "",
-        retypePassword: "",
-      });
+      fullName: "",
+      email: "",
+      password: "",
+      retypePassword: "",
+    });
   };
   return (
     <div className={classes.root}>
       {/* //form có sẵn hàm form.handleSubmit //mình cần truyền hàm mình vào */}
-      <Avatar className={classes.avatar}>
-        
-      </Avatar>
-      <Typography className={classes.title}>
-        Create An Account
-      </Typography>
+      <Avatar className={classes.avatar}></Avatar>
+      <Typography className={classes.title}>Create An Account</Typography>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField form={form} name="fullName" label="Full Name" />
         <InputField form={form} name="email" label="Email" />
-        <PasswordField form={form} name="password" label="Password"  />
-        <PasswordField form={form} name="retypePassword" label="Retype Password" />
-        <Button type="submit" className={classes.submit} variant="contained" color="primary" fullWidth>Create an account</Button>
+        <PasswordField form={form} name="password" label="Password" />
+        <PasswordField
+          form={form}
+          name="retypePassword"
+          label="Retype Password"
+        />
+        <Button
+          type="submit"
+          className={classes.submit}
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
+          Create an account
+        </Button>
       </form>
     </div>
   );

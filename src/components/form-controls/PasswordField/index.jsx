@@ -26,15 +26,15 @@ function PasswordField(props) {
   //lay cac prop ra
 
   //lay thong tin error
-//   const { formState } = form;
-//   const { errors } = formState;
-//   const hasError = !!errors[name]; // !! convert to boolean
-//   console.log(errors[name]);
+  const { formState } = form;
+  const { errors } = formState;
+  const hasError = !!errors[name]; // !! convert to boolean
+  console.log(errors[name]);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   return (
-    <div>
+    <div style={{marginTop: '10px', marginBottom: '20px'}}>
       <FormControl variant="outlined" fullWidth>
         <InputLabel htmlFor={name}>{label}</InputLabel>
         <Controller
@@ -62,8 +62,9 @@ function PasswordField(props) {
                     </InputAdornment>
                 }
                 />
-        )}
+            )}  
         />
+        <FormHelperText error={!!hasError}>{errors[name]?.message}</FormHelperText>
       </FormControl>
     </div>
   );
