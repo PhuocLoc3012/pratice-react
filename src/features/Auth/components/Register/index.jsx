@@ -1,9 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 import RegisterForm from '../RegisterForm';
+import { ostring } from 'zod';
 
 Register.propTypes = {
-    
+  
 };
 
 function Register(props) {
