@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextField from '@mui/material/TextField';
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { Controller } from "react-hook-form";
 
 InputField.propTypes = {
@@ -31,9 +30,10 @@ function InputField(props) {
             <TextField              //textfield này đến từ MaterialUI
               {...field} // truyền các props từ field
               fullWidth
+              variant="outlined"
+              margin="normal"
               label={label}
-              disabled={disabled}
-
+              disabled={disabled}  
               error={hasError}
               helperText={errors[name]?.message}
               
