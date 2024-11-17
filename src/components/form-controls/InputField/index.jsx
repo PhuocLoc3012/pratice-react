@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TextField } from "@material-ui/core";
+import TextField from '@mui/material/TextField';
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { Controller } from "react-hook-form";
 

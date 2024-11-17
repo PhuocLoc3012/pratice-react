@@ -6,10 +6,18 @@ import Counter from "./components/Counter";
 import ColorBox from "./components/ColorBox";
 import { Link, NavLink, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
-import { Switch } from "@material-ui/core";
 import { useEffect } from "react";
 import productApi from "./api/productApi";
 import CounterFeature from "./features/Counter";
+
+import styled from 'styled-components'
+import Header from "components/Header";
+const Title = styled.h1`
+  text-align: center,
+  font-weight: bold,
+  color: ${(props) => props.color || 'green'}
+`;
+
 
 function App() {
 
@@ -27,12 +35,11 @@ function App() {
 
   return (
     <div className="App">
-      Header
+      <Header />
       <br/>
-      <Link to="/todos">Todos</Link>
-      <Link to="/albums">Albums</Link>
-      <NavLink to="/todos">Todos</NavLink>
-      <NavLink to="/albums">Albums</NavLink>
+      {/* <Link to="/todos">Todos</Link>
+      <Link to="/albums">Albums</Link> */}
+
 
       <Routes>  
         {/* Nested Routing */}
