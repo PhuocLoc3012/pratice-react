@@ -41,24 +41,20 @@ function RegisterForm(props) {
   //valiation
   const schema = z
     .object({
-      fullName: z
-        .string()
-        .min(1, "Fullname is required")
-        .refine(
-          (value) => value.split(" ").length >= 2,
-          "Fullname is at least two words"
-        ),
-      email: z
-        .string()
-        .email("Invalid email address"),
+      username: z.string().min(1, "Username is required"),
+      // .refine(
+      //   (value) => value.split(" ").length >= 2,
+      //   "Username is at least two words"
+      // ),
+      firstName: z.string().min(1, "First name is required"),
+      lastName: z.string().min(1, "Last name is required"),
+      email: z.string().email("Invalid email address"),
       password: z
         .string()
         .min(1, { message: "Password is required" })
-        .min(6, "Password must be at least 6 characters")
+        .min(8, "Password must be at least 8 characters")
         .nonempty({ message: "Password is required" }),
-      retypePassword: z
-        .string()
-        .min(1, 'Please retype your password')
+      retypePassword: z.string().min(1, "Please retype your password"),
     })
     .refine((data) => data.password === data.retypePassword, {
       message: "Passwords must match",
@@ -67,7 +63,9 @@ function RegisterForm(props) {
   //tạo ra form object sử dụng hook useForm
   const form = useForm({
     defaultValues: {
-      fullName: "",
+      userName: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       retypePassword: "",
@@ -81,7 +79,9 @@ function RegisterForm(props) {
       onSubmit(values);
     }
     form.reset({
-      fullName: "",
+      userName: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       retypePassword: "",
@@ -93,7 +93,9 @@ function RegisterForm(props) {
       <Avatar className={classes.avatar}></Avatar>
       <Typography className={classes.title}>Create An Account</Typography>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <InputField form={form} name="fullName" label="Full Name" />
+        <InputField form={form} name="username" label="User name" />
+        <InputField form={form} name="firstName" label="First Name" />
+        <InputField form={form} name="lastName" label="Last Name" />
         <InputField form={form} name="email" label="Email" />
         <PasswordField form={form} name="password" label="Password" />
         <PasswordField

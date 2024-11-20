@@ -12,6 +12,7 @@ import CounterFeature from "./features/Counter";
 
 import styled from 'styled-components'
 import Header from "components/Header";
+import EmailConfirm from "features/ToDo/pages/Email/index";
 const Title = styled.h1`
   text-align: center,
   font-weight: bold,
@@ -46,6 +47,7 @@ function App() {
         <Route path="/todos/*" element={<ToDoFeature/>} />
         <Route path="/albums" element={<AlbumFeature/>} />
         <Route path="/" element={<CounterFeature/>}></Route>
+        <Route path="/confirm-email" element={<EmailConfirm/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
 
