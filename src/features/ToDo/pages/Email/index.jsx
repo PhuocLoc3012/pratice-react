@@ -7,27 +7,29 @@ function EmailConfirm() {
     const location = useLocation();
 
     useEffect(() => {
-        // Extract query parameters
-        const queryParams = new URLSearchParams(location.search);
-        const userId = queryParams.get('userId');
-        const token = queryParams.get('token');
+        const confirmEmail = async () => {
+            const queryParams = new URLSearchParams(location.search);
+            const userId = queryParams.get('userId');
+            const token = queryParams.get('token');
 
-        if (!userId || !token) {
-            setStatus('error');
-            return;
-        }
-
-        // Call the backend API to confirm email
-        axios
-            .get(`https://your-api-url.com/api/confirm-email`, {
-                params: { userId, token },
-            })
-            .then(() => {
-                setStatus('success');
-            })
-            .catch(() => {
+            if (!userId || !token) {
                 setStatus('error');
-            });
+                return;
+            }
+
+            try {
+                await axios.post(`https://localhost:7160/api/Auth/confirm-email`, {
+                    userId,
+                    token
+                });
+                setStatus('success');
+            } catch (error) {
+                console.error('Email confirmation error:', error);
+                setStatus('error');
+            }
+        };
+
+        confirmEmail();
     }, [location.search]);
 
     return (
